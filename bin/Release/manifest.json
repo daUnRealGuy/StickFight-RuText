@@ -1,9 +1,0 @@
-{
-    "name": "StickFight_RuText",
-    "version_number": "1.0.1",
-    "website_url": "",
-    "description": "Добавляет русскую раскладку (как бы) совместимую с игроками без этого мода! Идеально для публичных лобби.",
-    "dependencies": [
-    	"SFTG_Modding-BepInExPack_SFTG-1.1.1"
-  ]
-}
