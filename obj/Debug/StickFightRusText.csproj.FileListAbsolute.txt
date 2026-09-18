@@ -1,7 +1,0 @@
-H:\SteamSelf\steamapps\common\StickFightTheGame\BepInEx\plugins\RuText\StickFightRusText.dll
-H:\SteamSelf\steamapps\common\StickFightTheGame\BepInEx\plugins\RuText\StickFightRusText.pdb
-H:\Documents\VS_Projects\StickFightRusText\StickFightRusText\obj\Debug\StickFightRusText.csproj.AssemblyReference.cache
-H:\Documents\VS_Projects\StickFightRusText\StickFightRusText\obj\Debug\StickFightRusText.csproj.CoreCompileInputs.cache
-H:\Documents\VS_Projects\StickFightRusText\StickFightRusText\obj\Debug\StickFig.DEDA2E1E.Up2Date
-H:\Documents\VS_Projects\StickFightRusText\StickFightRusText\obj\Debug\StickFightRusText.dll
-H:\Documents\VS_Projects\StickFightRusText\StickFightRusText\obj\Debug\StickFightRusText.pdb
