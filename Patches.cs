@@ -74,7 +74,7 @@ namespace StickFightRusText
                 {
                     char ch=message[1];
                     byte n=Plugin.colorPowerOfTwo[ch.ToString()];
-                    Plugin.taggedRussian|=n;
+                    Plugin.taggedRussian^=n;
                     //__instance.Talk($"{(ch=='y' ? "Yellow":(ch=='b' ? "Blue":(ch=='r' ? "Red":"Green")))} is now set to {((Plugin.taggedRussian&n)==n ? "":"not ")}be russian!");
                     __instance.Talk($"{(ch=='y' ? "Жёлтый":(ch=='b' ? "Синий":(ch=='r' ? "Красный":"Зелёный")))} теперь помечен как {((Plugin.taggedRussian&n)==n ? "":"не ")}русский!");
                     return false;
@@ -83,7 +83,7 @@ namespace StickFightRusText
                 {
                     char ch=message[1];
                     byte n=Plugin.colorPowerOfTwo[ch.ToString()];
-                    Plugin.haveTheMod|=n;
+                    Plugin.haveTheMod^=n;
                     //__instance.Talk($"{(ch=='y' ? "Yellow":(ch=='b' ? "Blue":(ch=='r' ? "Red":"Green")))} is now set to {((Plugin.taggedRussian&n)==n ? "":"not ")}be russian!");
                     __instance.Talk($"{(ch=='y' ? "Жёлтый":(ch=='b' ? "Синий":(ch=='r' ? "Красный":"Зелёный")))} теперь считается {((Plugin.haveTheMod&n)==n ? "с":"без")} RuText Mod!");
                     return false;
@@ -128,7 +128,7 @@ namespace StickFightRusText
         [HarmonyPrefix]
         static bool NotifyRuTextMod(P2PPackageHandler __instance,CSteamID clientID,byte[] data,P2PPackageHandler.MsgType messageType,EP2PSend sendMethod=EP2PSend.k_EP2PSendReliable,int channel=0)
         {
-            if(messageType==P2PPackageHandler.MsgType.PlayerTalked&&data[0]!=(byte)'['&&data[1]!=(byte)'R')
+            if(messageType==P2PPackageHandler.MsgType.PlayerTalked&&data.Length>1&&data[0]!=(byte)'['&&data[1]!=(byte)'R')
             {
                 int id=-1;
                 for(int i=0;i<GameManager.Instance.mMultiplayerManager.ConnectedClients.Length;i++)
@@ -149,7 +149,7 @@ namespace StickFightRusText
                     }
                     if(isRus)
                     {
-                        byte[] newdata=Encoding.UTF8.GetBytes("[RuText Mod] "+Plugin.BreakRussianText(t));
+                        byte[] newdata=Encoding.UTF8.GetBytes(Plugin.prefix+Plugin.BreakRussianText(t));
                         __instance.SendP2PPacketToUser(clientID,newdata,messageType,sendMethod,channel);
                         return false;
                     }
