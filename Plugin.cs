@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 
 namespace StickFightRusText
 {
-    [BepInPlugin("exmagikguy.stickfightthegame.rutext","Rus Text","1.0.0")]
+    [BepInPlugin("exmagikguy.stickfightthegame.rutext","Rus Text","1.1.0")]
     [BepInProcess("StickFight.exe")]
     public class Plugin : BaseUnityPlugin
     {
