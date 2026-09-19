@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 
 namespace StickFightRusText
 {
-    [BepInPlugin("exmagikguy.stickfightthegame.rutext","Rus Text","1.1.0")]
+    [BepInPlugin("exmagikguy.stickfightthegame.rutext","Rus Text","1.1.1")]
     [BepInProcess("StickFight.exe")]
     public class Plugin : BaseUnityPlugin
     {
@@ -27,7 +27,7 @@ namespace StickFightRusText
         public static FieldInfo textField=typeof(ChatManager).GetField("text",BindingFlags.NonPublic|BindingFlags.Instance);
         public static FieldInfo playerTextsField=typeof(OnlinePlayerUI).GetField("mPlayerTexts",BindingFlags.NonPublic|BindingFlags.Public|BindingFlags.Instance);
         public const string Guid="exmagikguy.stickfightthegame.rutext";
-        public const string VersionNumber="1.0.0";
+        public const string VersionNumber="1.1.1";
         public static Texture2D rusFontAtlas=null;
         public static byte taggedRussian=byte.MinValue;
         public static byte haveTheMod=byte.MinValue;
@@ -69,15 +69,23 @@ namespace StickFightRusText
         {
             mevar=this;
             Log(0,"By downloading this mod you confirm that you are RUSSIAN!!");
-            byte[] data = File.ReadAllBytes(Path.Combine(Path.Combine(Assembly.GetExecutingAssembly().Location,".."),"RusFont.png"));
+            //byte[] data = File.ReadAllBytes(Path.Combine(Path.Combine(Assembly.GetExecutingAssembly().Location,".."),"RusFont.png"));
             Texture2D texture2D=new Texture2D(2,2,TextureFormat.RGBA32,false);
-            texture2D.LoadImage(data);
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("StickFightRusText.RusFont.png"))
+            {
+                if (stream==null)
+                {
+                    return;
+                }
+                byte[] data=new byte[stream.Length];
+                stream.Read(data,0,data.Length);
+                texture2D.LoadImage(data);
+            }
             rusFontAtlas=texture2D;
             //SceneManager.activeSceneChanged+=OnSceneChanged;
             //Invoke("InjectHandler",0.2f);
             new Harmony("exmagikguy.stickfightthegame.rutext").PatchAll();
             Log(0,"By downloading this mod you confirm that you are RUSSIAN!!!");
-
         }
         public static void MakeRusFont(TMP_FontAsset original)
         {
